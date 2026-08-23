@@ -46,9 +46,24 @@ asegurar_mariadb() {
     echo "¡Configuración de seguridad completada!"
 }
 
+
+
+desinstalar_mariadb() {
+    echo "Desinstalando MariaDB..."
+
+    sudo systemctl stop mariadb
+    sudo DEBIAN_FRONTEND=noninteractive apt purge -y "mariadb*"
+    sudo apt autoremove -y
+    sudo rm -rf /var/lib/mysql /etc/mysql /var/log/mysql /var/run/mysqld /usr/share/mysql
+
+    echo "¡Adios Mariadb!"
+}
+
 chequear_mariadb_instalado() {
     if dpkg-query -W -f='${Status}' mariadb-server 2>/dev/null | grep -q "ok installed"; then
         echo "MariaDB ya está instalado en el sistema."
+	echo "A desinstalar se ha dicho"
+        desinstalar_mariadb
         return 0 
     else
         echo "MariaDB no está instalado."
