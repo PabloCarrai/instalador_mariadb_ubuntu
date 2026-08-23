@@ -32,7 +32,7 @@ instalar_mariadb_desatendido() {
     # 2. Iniciar y habilitar servicio
     sudo systemctl start mariadb
     sudo systemctl enable mariadb
-
+}
 
 asegurar_mariadb() {
     echo "Aplicando configuraciones de seguridad en MariaDB..."
